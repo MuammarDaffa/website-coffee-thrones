@@ -6,92 +6,108 @@
 @section('content')
 <div class="container mt-4 position-relative">
 
-  <!-- 🌅 Latar belakang gradient dan bentuk gelombang -->
-  <div class="hero-bg position-relative overflow-hidden rounded-4 mb-5">
-    <div class="wave wave1"></div>
-    <div class="wave wave2"></div>
-    <div class="text-center text-white py-5" data-aos="fade-down">
-      <h2 class="fw-bold animate__animated animate__fadeInDown">☕ Selamat Datang di Thrones Coffee!</h2>
-      <p class="animate__animated animate__fadeIn animate__delay-1s">Kelola produk dan pesanan cafemu dengan cepat dan mudah.</p>
+<div class="coffee-particles">
+  @for($i = 0; $i < 50; $i++)
+    <span class="particle" style="
+      left: {{ rand(0,100) }}%;
+      width: {{ rand(2,6) }}px;
+      height: {{ rand(2,6) }}px;
+      animation-duration: {{ rand(8,15) }}s;
+      opacity: {{ rand(3,7)/10 }};
+    "></span>
+  @endfor
+</div>
+
+
+
+  <!-- 🌤️ Hero -->
+  <div class="text-center py-5 position-relative" style="z-index:1;">
+    <div data-aos="fade-down">
+      <h2 class="fw-bold text-brown animate__animated animate__fadeInDown">☕ Selamat Datang di Thrones Coffee!</h2>
+      <p class="text-muted animate__animated animate__fadeIn animate__delay-1s">Kelola produk dan pesanan cafemu dengan cepat dan menyenangkan.</p>
       <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-        <a href="{{ route('produk.kopi') }}" class="btn btn-light btn-lg rounded-pill px-4 shadow-sm">
+        <a href="{{ route('produk.kopi') }}" class="btn btn-brown btn-lg rounded-pill px-4 shadow-sm">
           <i class="bi bi-cup-hot-fill"></i> Kelola Kopi
         </a>
-        <a href="{{ route('produk.makanan') }}" class="btn btn-outline-light btn-lg rounded-pill px-4 shadow-sm">
+        <a href="{{ route('produk.makanan') }}" class="btn btn-outline-brown btn-lg rounded-pill px-4 shadow-sm">
           <i class="bi bi-egg-fried"></i> Kelola Makanan
         </a>
       </div>
     </div>
+   
   </div>
 
   <!-- 📊 Statistik Floating Cards -->
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card stat-card p-4 text-center shadow-lg" data-aos="fade-up">
-        <div class="icon mb-3 bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width:60px; height:60px;">
-          <i class="bi bi-cup-hot-fill fs-3"></i>
-        </div>
-        <h5>Total Kopi</h5>
-        <h2 class="text-primary">{{ $totalKopi ?? 0 }}</h2>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card stat-card p-4 text-center shadow-lg" data-aos="fade-up" data-aos-delay="100">
-        <div class="icon mb-3 bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width:60px; height:60px;">
-          <i class="bi bi-egg-fried fs-3"></i>
-        </div>
-        <h5>Total Makanan</h5>
-        <h2 class="text-success">{{ $totalMakanan ?? 0 }}</h2>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card stat-card p-4 text-center shadow-lg" data-aos="fade-up" data-aos-delay="200">
-        <div class="icon mb-3 bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width:60px; height:60px;">
-          <i class="bi bi-basket fs-3"></i>
-        </div>
-        <h5>Pesanan Terbaru</h5>
-        <h2 class="text-warning">{{ $totalPesanan ?? 0 }}</h2>
-      </div>
-    </div>
-  </div>
+
 
 </div>
 
 <!-- ✨ Style -->
 <style>
-  /* Hero Background Gradient dengan Gelombang */
-  .hero-bg {
-    background: linear-gradient(135deg, #1a87d0, #6fb1fc);
-    position: relative;
-    overflow: hidden;
-  }
-  .wave {
-    position: absolute;
-    width: 200%;
-    height: 100%;
-    background: rgba(255,255,255,0.1);
-    border-radius: 45%;
-    animation: waveAnim 20s linear infinite;
-    top: -30%;
-    left: -50%;
-  }
-  .wave2 {
-    animation-delay: -10s;
-  }
-  @keyframes waveAnim {
-    0% { transform: translateX(0) translateY(0) rotate(0deg);}
-    50% { transform: translateX(20%) translateY(5%) rotate(5deg);}
-    100% { transform: translateX(0) translateY(0) rotate(0deg);}
-  }
+ /* Warna tema biru */
+.text-brown { color: #1A87D0; } /* ganti text-brown jadi text-blue */
+.btn-brown { background-color: #1A87D0; color: white; border:none; }
+.btn-brown:hover { background-color: #166fb0; }
+.btn-outline-brown { border: 2px solid #1A87D0; color:#1A87D0; }
+.btn-outline-brown:hover { background-color: #1A87D0; color:white; }
 
-  /* Statistik Card Floating Effect */
-  .stat-card {
-    border-radius: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Icon kartu (opsional) */
+.stat-card .icon.bg-brown { background-color: #1A87D0; } /* ganti icon bg-brown jadi biru */
+
+
+  /* Floating/stat card hover */
+  .hover-float { transition: all 0.3s ease; border-radius:1rem; }
+  .hover-float:hover { transform: translateY(-10px); box-shadow:0 20px 40px rgba(0,0,0,0.2); }
+
+  /* Animasi cangkir kopi */
+  .coffee-cup { animation-duration: 2s; animation-timing-function: ease-in-out; }
+
+  /* Partikel kopi full background */
+  .coffee-particles {
+    position: fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
   }
-  .stat-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  .coffee-particles::before {
+    content: '';
+    position: absolute;
+    width: 8px; height: 8px;
+    background: #6f4e37;
+    border-radius:50%;
+    animation: floatCoffee 15s linear infinite;
+    top:100%; left:20%;
+    opacity:0.6;
   }
+  .coffee-particles::after {
+    content: '';
+    position: absolute;
+    width: 6px; height: 6px;
+    background: #8b5e3c;
+    border-radius:50%;
+    animation: floatCoffee 20s linear infinite;
+    top:100%; left:60%;
+    opacity:0.5;
+  }
+.coffee-particles .particle {
+  position: absolute;
+  background: #1A87D0; /* ganti dari coklat ke biru */
+  border-radius: 50%;
+  top: 100%;
+  animation-name: floatCoffee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes floatCoffee {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity:1; }
+  100% { transform: translateY(-1200px) translateX(50px) rotate(360deg); opacity:0; }
+}
+
+
 </style>
 @endsection
