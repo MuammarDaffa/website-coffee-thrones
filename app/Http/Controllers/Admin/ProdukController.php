@@ -143,10 +143,10 @@ class ProdukController extends Controller
         return view('admin.produk.makanan', compact('produks'));
     }
 
- public function search(Request $request)
+public function search(Request $request)
 {
     $keyword = $request->get('q');
-    $kategori = $request->get('kategori'); // kalau mau filter per kategori
+    $kategori = $request->get('kategori');
 
     $query = Produk::query();
 
@@ -155,8 +155,7 @@ class ProdukController extends Controller
     }
 
     if ($keyword) {
-        $query->where('nama_produk', 'like', "%{$keyword}%")
-              ->orWhere('deskripsi', 'like', "%{$keyword}%");
+        $query->where('nama_produk', 'like', "%{$keyword}%"); // hanya nama_produk
     }
 
     $produks = $query->limit(10)->get();
