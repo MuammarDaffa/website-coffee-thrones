@@ -9,7 +9,7 @@ use App\Models\Produk;
 class ProdukController extends Controller
 {
     // ======================
-    // 🔹 INDEX UMUM
+    // INDEX UMUM
     // ======================
     public function index()
     {
@@ -18,7 +18,7 @@ class ProdukController extends Controller
     }
 
     // ======================
-    // 🔹 TAMBAH PRODUK
+    //  TAMBAH PRODUK
     // ======================
     public function create()
     {
@@ -39,7 +39,7 @@ class ProdukController extends Controller
     }
 
     // ======================
-    // 🔹 EDIT & UPDATE
+    //  EDIT & UPDATE
     // ======================
     public function edit($id)
     {
@@ -69,7 +69,7 @@ class ProdukController extends Controller
     }
 
     // ======================
-    // 🔹 HAPUS PRODUK
+    // HAPUS PRODUK
     // ======================
     public function destroy($id)
     {
@@ -89,7 +89,7 @@ class ProdukController extends Controller
     }
 
     // ======================
-    // 🔹 FILTER PER KATEGORI + SEARCH
+    // FILTER PER KATEGORI + SEARCH
     // ======================
 
     public function kopi(Request $request)
