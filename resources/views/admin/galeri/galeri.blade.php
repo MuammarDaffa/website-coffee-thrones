@@ -73,13 +73,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
+                    {{-- PREVIEW GAMBAR --}}
+                    <img id="previewCreate" src="" alt="Preview Gambar" 
+                         class="img-fluid mb-3 rounded d-none" 
+                         style="max-height: 250px; object-fit: cover;">
+
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Pilih Gambar</label>
-                        <input type="file" class="form-control" name="gambar" id="gambar" required>
+                        <input type="file" class="form-control" name="gambar" id="gambarCreate" required>
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <textarea name="deskripsi" id="deskripsi" rows="3" class="form-control" placeholder="Tulis deskripsi singkat..."></textarea>
+                        <textarea name="deskripsi" id="deskripsiCreate" rows="3" class="form-control" placeholder="Tulis deskripsi singkat..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -106,11 +111,11 @@
                     <img id="previewImage" src="" alt="Preview" class="img-fluid mb-3 rounded">
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Ganti Gambar (opsional)</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar">
+                        <input type="file" class="form-control" id="gambarEdit" name="gambar">
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                        <textarea name="deskripsi" id="deskripsi" rows="3" class="form-control"></textarea>
+                        <textarea name="deskripsi" id="deskripsiEdit" rows="3" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -126,15 +131,40 @@
 <script>
     function openCreateModal() {
         const modal = new bootstrap.Modal(document.getElementById('createModal'));
+        document.getElementById('previewCreate').classList.add('d-none');
+        document.getElementById('gambarCreate').value = "";
+        document.getElementById('deskripsiCreate').value = "";
         modal.show();
     }
 
+    // ✅ Preview gambar di modal tambah
+    document.getElementById('gambarCreate').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const preview = document.getElementById('previewCreate');
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.classList.remove('d-none');
+        } else {
+            preview.classList.add('d-none');
+        }
+    });
+
+    // ✅ Modal Edit
     function openEditModal(id, deskripsi, imageUrl) {
         const modal = new bootstrap.Modal(document.getElementById('editModal'));
         document.getElementById('editForm').action = `/admin/galeri/${id}`;
-        document.getElementById('deskripsi').value = deskripsi;
+        document.getElementById('deskripsiEdit').value = deskripsi;
         document.getElementById('previewImage').src = imageUrl;
         modal.show();
     }
+
+    // ✅ Preview gambar di modal edit
+    document.getElementById('gambarEdit').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const preview = document.getElementById('previewImage');
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+        }
+    });
 </script>
 @endsection
