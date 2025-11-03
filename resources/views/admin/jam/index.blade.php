@@ -5,7 +5,6 @@
 
 @section('content')
 <div class="container mt-4">
-    {{-- SweetAlert session success --}}
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -20,7 +19,7 @@
         </script>
     @endif
 
-    <h3 class="mb-3 text-center">Jam Operasional (Senin - Minggu)</h3>
+    <h3 class="mb-3 text-center">Jam Operasional</h3>
 
     <div class="table-responsive">
         <table class="table table-bordered text-center align-middle">
@@ -35,12 +34,17 @@
             <tbody>
                 @foreach ($jam as $item)
                 <tr>
-                    <td class="text-start">{{ $item->day }}</td>
+                    <td class="text-start">{{ $item->day_group }}</td>
                     <td>{{ $item->open_time ?? '-' }}</td>
                     <td>{{ $item->close_time ?? '-' }}</td>
                     <td>
-                        <button class="btn btn-warning btn-sm"
-                                onclick="openEditModal({{ $item->id }}, '{{ $item->day }}', '{{ $item->open_time ?? '' }}', '{{ $item->close_time ?? '' }}')">
+                        {{-- Gunakan data-* attributes agar aman (tidak ada masalah quoting) --}}
+                        <button type="button"
+                                class="btn btn-warning btn-sm btn-edit"
+                                data-id="{{ $item->id }}"
+                                data-day="{{ $item->day_group }}"
+                                data-open="{{ $item->open_time ?? '' }}"
+                                data-close="{{ $item->close_time ?? '' }}">
                             Edit
                         </button>
                     </td>
@@ -67,12 +71,12 @@
 
                     <div class="mb-3">
                         <label for="open_time" class="form-label">Jam Buka</label>
-                        <input type="time" class="form-control" name="open_time" id="open_time" required>
+                        <input type="time" class="form-control" name="open_time" id="open_time">
                     </div>
 
                     <div class="mb-3">
                         <label for="close_time" class="form-label">Jam Tutup</label>
-                        <input type="time" class="form-control" name="close_time" id="close_time" required>
+                        <input type="time" class="form-control" name="close_time" id="close_time">
                     </div>
                 </div>
 
@@ -85,34 +89,37 @@
     </div>
 </div>
 
-{{-- include SweetAlert --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
-    function openEditModal(id, day, open, close) {
-        const modal = new bootstrap.Modal(document.getElementById('editModal'));
-        document.getElementById('editForm').action = `/admin/jam-operasional/${id}`;
-        document.getElementById('dayLabel').innerText = `Hari: ${day}`;
-        document.getElementById('open_time').value = open || '';
-        document.getElementById('close_time').value = close || '';
-        modal.show();
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.btn-edit');
+    const editModalEl = document.getElementById('editModal');
+    const editModal = new bootstrap.Modal(editModalEl);
+    const editForm = document.getElementById('editForm');
+    const dayLabel = document.getElementById('dayLabel');
+    const openInput = document.getElementById('open_time');
+    const closeInput = document.getElementById('close_time');
 
-    // Optional: tampilkan SweetAlert sebelum submit (tunggu sebentar lalu submit)
-    // Jika kamu lebih suka menampilkan alert dari session (setelah reload),
-    // hapus blok ini. Disini kita pakai session alert di atas.
-    /*
-    document.getElementById('editForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const form = this;
-        Swal.fire({
-            icon: 'success',
-            title: 'Jam operasional diperbarui!',
-            showConfirmButton: false,
-            timer: 1200
+    editButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.dataset.id;
+            const day = btn.dataset.day;
+            const open = btn.dataset.open || '';
+            const close = btn.dataset.close || '';
+
+            // set action dan nilai input
+            editForm.action = `/admin/jam-operasional/${id}`;
+            dayLabel.innerText = `Hari: ${day}`;
+            openInput.value = open;
+            closeInput.value = close;
+
+            editModal.show();
         });
-        setTimeout(() => form.submit(), 1200);
     });
-    */
+
+    // Optional: show SweetAlert after submit with a tiny delay so user sees it
+    // BUT because controller redirects back with session('success'),
+    // we currently rely on session alert (so no need to intercept submit here).
+});
 </script>
 @endsection

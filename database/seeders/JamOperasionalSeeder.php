@@ -9,13 +9,14 @@ class JamOperasionalSeeder extends Seeder
 {
     public function run(): void
     {
-        $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+        JamOperasional::firstOrCreate(
+            ['day_group' => 'Senin - Jumat'],
+            ['open_time' => '08:00', 'close_time' => '22:00']
+        );
 
-        foreach ($days as $day) {
-            JamOperasional::firstOrCreate(
-                ['day' => $day],
-                ['open_time' => null, 'close_time' => null]
-            );
-        }
+        JamOperasional::firstOrCreate(
+            ['day_group' => 'Sabtu - Minggu'],
+            ['open_time' => '09:00', 'close_time' => '23:00']
+        );
     }
 }

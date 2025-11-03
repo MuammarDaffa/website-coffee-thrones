@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
+use App\Models\Galeri; // ✅ tambahkan ini
 
 class FrontendController extends Controller
 {
@@ -15,7 +16,12 @@ class FrontendController extends Controller
         $nonkopi = Produk::where('kategori', 'nonkopi')->get();
         $makanan = Produk::where('kategori', 'makanan')->get();
 
-        return view('frontend.index', compact('kopi', 'nonkopi', 'makanan'));
+        // ✅ Ambil semua galeri juga
+        $galeri = Galeri::latest('created_at')->take(9)->get();
+        $total = Galeri::count();
+
+        // ✅ Kirim semua variabel ke view
+        return view('frontend.index', compact('kopi', 'nonkopi', 'makanan', 'galeri'));
     }
 
     // Halaman detail produk

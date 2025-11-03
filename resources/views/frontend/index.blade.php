@@ -150,37 +150,36 @@
 
     <!-- Gallery Section -->
     <section class="gallery" id="gallery">
-        <div class="container">
-            <h2 class="section-title">Galeri Kami</h2>
-            
-            <div class="gallery-grid">
+    <div class="container">
+        <h2 class="section-title">Galeri Kami</h2>
+
+        <div class="gallery-grid">
+            @forelse($galeri as $item)
                 <div class="gallery-item">
-                    <img src="{{ asset('build/assets/images/galeri 1.jpg') }}" alt="">
+                    <div class="gallery-thumb position-relative overflow-hidden">
+                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ Str::limit($item->deskripsi ?? 'Gambar galeri', 60) }}">
+                        <div class="gallery-overlay">
+                            <div class="overlay-text">
+                                {{ $item->deskripsi ?? '-' }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item tall">
-                    <img src="{{ asset('build/assets/images/galeri 2.jpg') }}" alt="">
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('build/assets/images/galeri 3.jpg') }}" alt="">
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('build/assets/images/galeri 4.jpg') }}" alt="">
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('build/assets/images/galeri 5.jpg') }}" alt="">
-                </div>
-                <div class="gallery-item tall">
-                    <img src="{{ asset('build/assets/images/galeri 6.jpg') }}" alt="">
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('build/assets/images/galeri 7.jpg') }}" alt="">
-                </div>
-                <div class="gallery-item">
-                    <img src="{{ asset('build/assets/images/galeri 8.jpg') }}" alt="">
-                </div>
-            </div>
+            @empty
+                <p class="text-muted">Belum ada gambar di galeri.</p>
+            @endforelse
         </div>
-    </section>
+
+        @if(isset($total) && $total > 9)
+            <div class="text-center mt-3">
+                <a href="{{ route('galeri.front') }}" class="btn btn-outline-primary">
+                    Lihat semua galeri ({{ $total }})
+                </a>
+            </div>
+        @endif
+    </div>
+</section>
+
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
