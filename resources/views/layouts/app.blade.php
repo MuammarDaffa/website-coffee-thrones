@@ -7,6 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
     <link rel="icon" href="{{ asset('assets/images/kaiadmin/favicon.ico') }}" type="image/x-icon" />
+    <!-- 🌈 Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- ✨ AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+
 
     <!-- Fonts and icons -->
     <script src="{{ asset('build/assets/js/plugin/webfont/webfont.min.js') }}"></script>
@@ -47,7 +56,7 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a href="index.html" class="logo">
+                    <a href="/admin/dashboard" class="logo">
                         <span class="navbar-brand-text">Thrones Coffee</span>
                     </a>
 
@@ -104,11 +113,25 @@
                             </div>
                         </li>
 
+                        <li class="nav-item {{ request()->is('admin/galeri*') ? 'active' : '' }}">
+                            <a href="{{ route('galeri.index') }}">
+                                <i class="fas fa-images"></i>
+                                <p>Galeri</p>
+                            </a>
+                        </li>
+
+
+                          <li class="nav-item {{ request()->is('admin/jam-operasional*') ? 'active' : '' }}">
+                            <a href="{{ route('jam.index') }}">
+                                <i class="fas fa-clock"></i>
+                                <p>Jam Operasional</p>
+                            </a>
+                        </li>
                         <li class="nav-item mt-5">
                             <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                                 @csrf
                                 <button type="submit" class="nav-link btn btn-link d-flex align-items-center"
-                                    style="color: #fff; text-decoration: none;">
+                                    style="color: #f40000; text-decoration: none;">
                                     <i class="fas fa-sign-out-alt me-2"></i>
                                     <span>Logout</span>
                                 </button>
@@ -206,6 +229,15 @@
     {{-- Jquery & SweetAlert2 --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
 
     @yield('scripts')
 

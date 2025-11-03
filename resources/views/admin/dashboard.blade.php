@@ -23,14 +23,14 @@
   <!-- 🌤️ Hero -->
   <div class="text-center py-5 position-relative" style="z-index:1;">
     <div data-aos="fade-down">
-      <h2 class="fw-bold text-brown animate__animated animate__fadeInDown">☕ Selamat Datang di Thrones Coffee!</h2>
+      <h2 class="fw-bold text-blue animate__animated animate__fadeInDown">☕ Selamat Datang di Thrones Coffee!</h2>
       <p class="text-muted animate__animated animate__fadeIn animate__delay-1s">Kelola produk dan pesanan cafemu dengan cepat dan menyenangkan.</p>
       <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
         <a href="{{ route('produk.kopi') }}" class="btn btn-brown btn-lg rounded-pill px-4 shadow-sm">
-          <i class="bi bi-cup-hot-fill"></i> Kelola Kopi
+          Kelola Kopi
         </a>
         <a href="{{ route('produk.makanan') }}" class="btn btn-outline-brown btn-lg rounded-pill px-4 shadow-sm">
-          <i class="bi bi-egg-fried"></i> Kelola Makanan
+           Kelola Makanan
         </a>
       </div>
     </div>
@@ -45,14 +45,14 @@
 <!-- ✨ Style -->
 <style>
  /* Warna tema biru */
-.text-brown { color: #1A87D0; } /* ganti text-brown jadi text-blue */
+.text-blue { color: #1A87D0; } /* ganti text-brown jadi text-blue */
 .btn-brown { background-color: #1A87D0; color: white; border:none; }
 .btn-brown:hover { background-color: #166fb0; }
 .btn-outline-brown { border: 2px solid #1A87D0; color:#1A87D0; }
 .btn-outline-brown:hover { background-color: #1A87D0; color:white; }
 
 /* Icon kartu (opsional) */
-.stat-card .icon.bg-brown { background-color: #1A87D0; } /* ganti icon bg-brown jadi biru */
+
 
 
   /* Floating/stat card hover */
@@ -76,7 +76,7 @@
     content: '';
     position: absolute;
     width: 8px; height: 8px;
-    background: #6f4e37;
+    background: #1A87D0;
     border-radius:50%;
     animation: floatCoffee 15s linear infinite;
     top:100%; left:20%;
@@ -86,7 +86,7 @@
     content: '';
     position: absolute;
     width: 6px; height: 6px;
-    background: #8b5e3c;
+    background: #1A87D0;
     border-radius:50%;
     animation: floatCoffee 20s linear infinite;
     top:100%; left:60%;

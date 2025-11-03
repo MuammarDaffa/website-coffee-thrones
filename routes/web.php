@@ -5,6 +5,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ProdukController;
+use App\Http\Controllers\Admin\JamOperasionalController;
 
 // FRONTEND (pelanggan)
 Route::get('/', [FrontendController::class, 'index'])->name('home');
@@ -37,4 +38,9 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
 
     // RESOURCE PRODUK (CRUD)
     Route::resource('/produk', \App\Http\Controllers\Admin\ProdukController::class);
+    // CRUD GALERI
+    Route::resource('/galeri', \App\Http\Controllers\Admin\GaleriController::class);
+
+    Route::get('/jam-operasional', [JamOperasionalController::class, 'index'])->name('jam.index');
+    Route::put('/jam-operasional/{jamOperasional}', [JamOperasionalController::class, 'update'])->name('jam.update');
 });

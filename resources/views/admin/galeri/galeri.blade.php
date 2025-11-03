@@ -5,19 +5,7 @@
 
 @section('content')
 <div class="container mt-4">
-    @if (session('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil!',
-                    text: '{{ session('success') }}',
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-            });
-        </script>
-    @endif
+
 
     {{-- Tombol tambah gambar --}}
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -177,22 +165,26 @@
 
     // === SweetAlert untuk Tambah dan Edit ===
     document.getElementById('createForm').addEventListener('submit', function(e) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Gambar berhasil ditambahkan!',
-            showConfirmButton: false,
-            timer: 2000
-        });
+    e.preventDefault();
+    Swal.fire({
+        icon: 'success',
+        title: 'Gambar berhasil ditambahkan!',
+        showConfirmButton: false,
+        timer: 1500
     });
+    setTimeout(() => this.submit(), 1500);
+});
+document.getElementById('editForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    Swal.fire({
+        icon: 'success',
+        title: 'Gambar berhasil diperbarui!',
+        showConfirmButton: false,
+        timer: 1500
+    });
+    setTimeout(() => this.submit(), 1500);
+});
 
-    document.getElementById('editForm').addEventListener('submit', function(e) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Gambar berhasil diperbarui!',
-            showConfirmButton: false,
-            timer: 2000
-        });
-    });
 
     // === SweetAlert Konfirmasi Hapus ===
     document.querySelectorAll('.btn-delete').forEach(button => {
