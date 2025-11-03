@@ -5,9 +5,18 @@
 
 @section('content')
 <div class="container mt-4">
-    {{-- Pesan sukses --}}
     @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            });
+        </script>
     @endif
 
     {{-- Tombol tambah gambar --}}
@@ -43,12 +52,11 @@
                             </button>
 
                             <form action="{{ route('galeri.destroy', $item->id) }}" 
-                                  method="POST" class="d-inline">
+                                  method="POST" class="d-inline deleteForm">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" 
-                                        class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Yakin ingin menghapus gambar ini?')">
+                                <button type="button" 
+                                        class="btn btn-sm btn-danger btn-delete">
                                     Hapus
                                 </button>
                             </form>
@@ -65,7 +73,7 @@
 {{-- Modal Tambah Gambar --}}
 <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ route('galeri.store') }}" method="POST" enctype="multipart/form-data">
+        <form id="createForm" action="{{ route('galeri.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -127,8 +135,10 @@
     </div>
 </div>
 
-{{-- Script Modal --}}
+{{-- Script Modal dan SweetAlert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    // === Modal Tambah ===
     function openCreateModal() {
         const modal = new bootstrap.Modal(document.getElementById('createModal'));
         document.getElementById('previewCreate').classList.add('d-none');
@@ -137,7 +147,6 @@
         modal.show();
     }
 
-    // ✅ Preview gambar di modal tambah
     document.getElementById('gambarCreate').addEventListener('change', function(e) {
         const file = e.target.files[0];
         const preview = document.getElementById('previewCreate');
@@ -149,7 +158,7 @@
         }
     });
 
-    // ✅ Modal Edit
+    // === Modal Edit ===
     function openEditModal(id, deskripsi, imageUrl) {
         const modal = new bootstrap.Modal(document.getElementById('editModal'));
         document.getElementById('editForm').action = `/admin/galeri/${id}`;
@@ -158,13 +167,53 @@
         modal.show();
     }
 
-    // ✅ Preview gambar di modal edit
     document.getElementById('gambarEdit').addEventListener('change', function(e) {
         const file = e.target.files[0];
         const preview = document.getElementById('previewImage');
         if (file) {
             preview.src = URL.createObjectURL(file);
         }
+    });
+
+    // === SweetAlert untuk Tambah dan Edit ===
+    document.getElementById('createForm').addEventListener('submit', function(e) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Gambar berhasil ditambahkan!',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    });
+
+    document.getElementById('editForm').addEventListener('submit', function(e) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Gambar berhasil diperbarui!',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    });
+
+    // === SweetAlert Konfirmasi Hapus ===
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const form = this.closest('.deleteForm');
+            Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: "Gambar ini akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
     });
 </script>
 @endsection
