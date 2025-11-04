@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="container mt-4">
+    {{-- Notifikasi SweetAlert untuk success --}}
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -14,6 +15,20 @@
                     text: '{{ session('success') }}',
                     showConfirmButton: false,
                     timer: 2000
+                });
+            });
+        </script>
+    @endif
+
+    {{-- Notifikasi SweetAlert untuk error --}}
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: '{{ session('error') }}',
+                    confirmButtonText: 'OK'
                 });
             });
         </script>
@@ -38,7 +53,6 @@
                     <td>{{ $item->open_time ?? '-' }}</td>
                     <td>{{ $item->close_time ?? '-' }}</td>
                     <td>
-                        {{-- Gunakan data-* attributes agar aman (tidak ada masalah quoting) --}}
                         <button type="button"
                                 class="btn btn-warning btn-sm btn-edit"
                                 data-id="{{ $item->id }}"
@@ -107,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const open = btn.dataset.open || '';
             const close = btn.dataset.close || '';
 
-            // set action dan nilai input
             editForm.action = `/admin/jam-operasional/${id}`;
             dayLabel.innerText = `Hari: ${day}`;
             openInput.value = open;
@@ -116,10 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
             editModal.show();
         });
     });
-
-    // Optional: show SweetAlert after submit with a tiny delay so user sees it
-    // BUT because controller redirects back with session('success'),
-    // we currently rely on session alert (so no need to intercept submit here).
 });
 </script>
 @endsection
