@@ -12,7 +12,7 @@ class JamOperasional extends Model
     protected $table = 'jam_operasional';
 
     protected $fillable = [
-        'day',
+        'day_group',
         'open_time',
         'close_time',
     ];

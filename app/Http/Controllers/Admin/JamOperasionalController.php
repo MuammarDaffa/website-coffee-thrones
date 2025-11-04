@@ -10,46 +10,24 @@ class JamOperasionalController extends Controller
 {
     public function index()
     {
-        // ambil semua hari, urut berdasarkan id
         $jam = JamOperasional::orderBy('id')->get();
         return view('admin.jam.index', compact('jam'));
     }
 
-   public function update(Request $request, $id)
-{
-    $jam = JamOperasional::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $jam = JamOperasional::findOrFail($id);
 
-    // Validasi format jam jika ada (boleh kosong)
-    $request->validate([
-        'open_time' => 'nullable|date_format:H:i',
-        'close_time' => 'nullable|date_format:H:i',
-    ]);
+        // Ambil hanya field yang diisi
+        $data = $request->only(['open_time', 'close_time']);
 
-    // Ambil input langsung
-    $open_time = $request->input('open_time');   // bisa '' atau '08:00' atau null
-    $close_time = $request->input('close_time');
+        // Hapus key yang nilainya kosong agar tidak overwrite null
+        $data = array_filter($data, function ($value) {
+            return !is_null($value) && $value !== '';
+        });
 
-    // Bila input kosong string atau null, gunakan nilai lama
-    if ($open_time === null || $open_time === '') {
-        $open_time = $jam->open_time;
+        $jam->update($data);
+
+        return redirect()->back()->with('success', 'Jam operasional berhasil diperbarui');
     }
-
-    if ($close_time === null || $close_time === '') {
-        $close_time = $jam->close_time;
-    }
-
-    // Validasi logika: apabila kedua ada, pastikan open < close
-    if ($open_time && $close_time && $open_time >= $close_time) {
-        return redirect()->back()->with('error', 'Jam tutup harus lebih besar dari jam buka!');
-    }
-
-    $jam->update([
-        'open_time' => $open_time,
-        'close_time' => $close_time,
-    ]);
-
-    return redirect()->route('jam.index')->with('success', 'Jam operasional berhasil diperbarui!');
-}
-
-
 }

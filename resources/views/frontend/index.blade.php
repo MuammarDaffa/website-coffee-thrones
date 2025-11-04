@@ -16,6 +16,16 @@
         <div class="container header-container">
             <div class="logo-container">
                 <a href="#home" class="logo">Thrones<span>.</span></a>
+                   <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Cari menu atau produk...">
+                        <button id="search-btn" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div id="search-results" class="search-results"></div>
+                </div>
             </div>
             
             <nav id="nav">
