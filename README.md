@@ -1,4 +1,4 @@
-# Thrones Coffee ☕👑
+# Thrones Coffee ☕
 
 Thrones coffee adalah website yang dibuat menggunakan framework Laravel yang bisa digunakan sebagai wadah promosi dan profil dari kedai kopi.
 
