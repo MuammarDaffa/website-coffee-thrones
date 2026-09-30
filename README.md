@@ -13,26 +13,26 @@ Thrones coffee adalah website yang dibuat menggunakan framework Laravel yang bis
 ## ✨ Fitur
 
 ### 🛠️ Admin
-- 🔐 **Login** : Akses masuk aman khusus menggunakan akun admin.
-- 🏠 **Halaman Dashboard** : Halaman pendaratan (*landing page*) khusus admin yang berisi ucapan selamat datang dan ringkasan.
-- 📦 **Halaman Produk** : Mengelola (menambahkan, mengedit, dan menghapus) produk berdasarkan kategori seperti kopi, non-kopi, dan makanan.
-- 🖼️ **Halaman Galeri** : Mengelola daftar foto/galeri yang akan ditampilkan kepada pelanggan.
-- ⏰ **Halaman Jam Operasional** : Mengubah dan mengatur jam operasional kedai kopi yang akan sinkron dengan halaman pelanggan.
+- **Login** : Akses masuk aman khusus menggunakan akun admin.
+- **Halaman Dashboard** : Halaman pendaratan (*landing page*) khusus admin yang berisi ucapan selamat datang dan ringkasan.
+- **Halaman Produk** : Mengelola (menambahkan, mengedit, dan menghapus) produk berdasarkan kategori seperti kopi, non-kopi, dan makanan.
+- **Halaman Galeri** : Mengelola daftar foto/galeri yang akan ditampilkan kepada pelanggan.
+- **Halaman Jam Operasional** : Mengubah dan mengatur jam operasional kedai kopi yang akan sinkron dengan halaman pelanggan.
 
 ### 👥 Pelanggan
-- 🏠 **Halaman Beranda** : *Landing page* utama yang menyambut pelanggan.
-- 📖 **Halaman Tentang** : Menceritakan sejarah berdirinya Thrones Coffee.
-- ☕ **Halaman Menu** : Menampilkan katalog produk dari berbagai kategori (kopi, non-kopi, makanan).
-- 📸 **Halaman Galeri** : Menampilkan koleksi jepretan suasana dan tempat Thrones Coffee.
-- 📞 **Halaman Kontak** : Informasi kontak dan tautan sosial media seperti Instagram, Facebook, dan TikTok.
+- **Halaman Beranda** : *Landing page* utama yang menyambut pelanggan.
+- **Halaman Tentang** : Menceritakan sejarah berdirinya Thrones Coffee.
+- **Halaman Menu** : Menampilkan katalog produk dari berbagai kategori (kopi, non-kopi, makanan).
+- **Halaman Galeri** : Menampilkan koleksi jepretan suasana dan tempat Thrones Coffee.
+- **Halaman Kontak** : Informasi kontak dan tautan sosial media seperti Instagram, Facebook, dan TikTok.
 
 
 ## 🤝 Tim Kami 
 
 Ini adalah nama-nama anggota tim developer yang membangun website Thrones Coffee:
-1. 🧑‍💻 **Muammar Daffa Ikhwanda** - [GitHub Profile](https://github.com/MuammarDaffa)
-2. 🧑‍💻 **Tito Ferdinand Syahputra** - [GitHub Profile](https://github.com/Rahmaalok)
-3. 🧑‍💻 **Bayu Jois Wanviendi** - [GitHub Profile](https://github.com/Bayujois)
+1. **Muammar Daffa Ikhwanda** - [GitHub Profile](https://github.com/MuammarDaffa)
+2. **Tito Ferdinand Syahputra** - [GitHub Profile](https://github.com/Rahmaalok)
+3. **Bayu Jois Wanviendi** - [GitHub Profile](https://github.com/Bayujois)
 
 
 ## 🎨 UI (User Interface)
