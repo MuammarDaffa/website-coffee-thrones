@@ -37,7 +37,7 @@ Ini adalah nama-nama anggota tim developer yang membangun website Thrones Coffee
 
 ## 🎨 UI (User Interface)
 
-### 🛡️ Halaman Admin
+### Halaman Admin
 
 ##### 🏠 Dashboard
 !["Dashboard"](/storage/assets/Admin/halaman_dashboard.png)
